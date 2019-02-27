@@ -1,1 +1,9 @@
 # block-engine
+
+upload new image to docker hub
+
+```
+docker login
+docker build  -t bergplace/block-engine:1.01 .
+docker push bergplace/block-engine:1.01
+```
