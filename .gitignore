@@ -1,2 +1,12 @@
-*.pyc
-
+.env
+*.gz
+*.aux
+*.log
+*.toc
+*.dvi
+*.sqlite3
+*#
+*~
+.idea/*
+*swp
+__pycache*
