@@ -11,6 +11,16 @@ WELCOME TO
 |  /_ | | \||| |_//| || | \|||  /_
 \____\\_/  \|\____\\_/\_/  \|\____\
 
+PURPOSE
+- easily work with cryptocurrencies transaction data without 
+  need for using sites like http://blockexplorer.com
+
+WHAT IT DOES
+- connects to locally running cryptocurrency node
+- continously gets blocks from the node
+- adds addressess of to transaction input
+- saves to mongoDB
+
 BEFORE FIRST RUN
 
 - make sure you have docker and docker-compose installed
