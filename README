@@ -12,14 +12,18 @@ WELCOME TO
 \____\\_/  \|\____\\_/\_/  \|\____\
 
 PURPOSE
+
 - easily work with cryptocurrencies transaction data without 
   need for using sites like http://blockexplorer.com
 
+
 WHAT IT DOES
+
 - connects to locally running cryptocurrency node
 - continously gets blocks from the node
 - adds addressess of to transaction input
 - saves to mongoDB
+
 
 BEFORE FIRST RUN
 
@@ -28,6 +32,7 @@ BEFORE FIRST RUN
 - set RPC password and user on your cryptocurrency node
 - type those RPC credentials into .env file
 - run one of the commands listed below
+
 
 USAGE
 
