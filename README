@@ -1,9 +1,39 @@
-# block-engine
+WELCOME TO
+ ____  _     ____  ____  _  __
+/  _ \/ \   /  _ \/   _\/ |/ /
+| | //| |   | / \||  /  |   /
+| |_\\| |_/\| \_/||  \_ |   \
+\____/\____/\____/\____/\_|\_\
 
-upload new image to docker hub
+ _____ _      _____ _  _      _____
+/  __// \  /|/  __// \/ \  /|/  __/
+|  \  | |\ ||| |  _| || |\ |||  \
+|  /_ | | \||| |_//| || | \|||  /_
+\____\\_/  \|\____\\_/\_/  \|\____\
 
-```
-docker login
-docker build  -t bergplace/block-engine:1.01 .
-docker push bergplace/block-engine:1.01
-```
+BEFORE FIRST RUN
+
+- make sure you have docker and docker-compose installed
+- remember to create .env file with cp .env.dist .env
+- set RPC password and user on your cryptocurrency node
+- type those RPC credentials into .env file
+- run one of the commands listed below
+
+USAGE
+
+    PRODUCTION
+    - run full production version:
+        make prod
+
+    DEVELOPMENT
+    - run full version for local development:
+        make dev
+    - go into bash shell of block-engine container:
+        make block-engine-shell
+
+
+CONTACT
+
+in case of any troubles with this software
+feel free to create issue at
+https://github.com/bergplace/block-engine
