@@ -15,9 +15,10 @@ WELCOME TO
 BEFORE FIRST RUN
 
 - make sure you have docker and docker-compose installed
-- remember to create .env file with cp .env.dist .env
+- remember to create block-engine.conf file with
+  cp block-engine.default.conf block-engine.conf
 - set RPC password and user on your cryptocurrency node
-- type those RPC credentials into .env file
+- type those RPC credentials into block-engine.conf file
 - run one of the commands listed below
 
 USAGE

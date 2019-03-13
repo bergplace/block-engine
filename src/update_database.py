@@ -1,18 +1,15 @@
 """
 Update database
 """
+import os
 import time
 import traceback
-
-from btc_block_iterator import BTCBlockIterator
+from slickrpc import Proxy
 from logger import Logger
-
 import mongo
+from btc_block_iterator import BTCBlockIterator
 from tx_cache import TxCache
 from tx_resolve import resolve_input_addresses
-
-from slickrpc import Proxy
-import os
 
 
 class BlockchainDBMaintainer:
@@ -38,7 +35,7 @@ class BlockchainDBMaintainer:
             self.logger.info('current collection count: {}'.format(
                 self.mongo.blocks_collection.count()
             ))
-            time.sleep(max(0, 100 - int(time.time() - start_time)))
+            time.sleep(max(0, 30 - int(time.time() - start_time)))
 
     def save_blocks(self):
         """saves blocks"""

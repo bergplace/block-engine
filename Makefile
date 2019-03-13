@@ -1,9 +1,9 @@
 help:
 	less help-msg
 
-dev: build-block-engine-dev down-dev run-block-engine-dev
+dev: use-custom-conf build-block-engine-dev down-dev run-block-engine-dev
 
-prod: build-block-engine-prod down-prod run-block-engine-prod
+prod: use-custom-conf build-block-engine-prod down-prod run-block-engine-prod
 
 # DEV
 
@@ -31,3 +31,6 @@ run-block-engine-prod:
 
 block-engine-shell:
 	docker-compose exec block-engine bash
+
+use-custom-conf:
+	cp block-engine.conf .env
