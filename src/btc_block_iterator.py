@@ -2,11 +2,12 @@ import logging
 
 class BTCBlockIterator:
 
-    def __init__(self, connection, logger, start_hash=None, verification_threshold=10):
+    def __init__(self, connection, logger, mongo, verification_threshold=10):
         logger.info("initializing block iterator")
         self.logger = logger
         self.connection = connection
-        self.start_hash = start_hash
+        self.mongo = mongo
+        self.start_hash = mongo.hash_of_last_saved_block
         self.verification_threshold = verification_threshold
         self.blockchain = []
         self.recreate_blockchain()
@@ -24,6 +25,9 @@ class BTCBlockIterator:
     def recreate_blockchain(self):
         self.logger.info("start creating blockchain")
         block = {'previousblockhash': self.connection.getbestblockhash()}
+        if self.mongo.block_is_saved(block['previousblockhash']):
+            self.logger.info("Cryptocurrency node has less blocks than block-engine, waiting for more")
+            return
         while True:
             if block.get('previousblockhash', self.start_hash) == self.start_hash:
                 break # ERROR: IF START BLOCK IS AFTER BEST BLOCK, IT WILL DUPLICATE ENTRIES

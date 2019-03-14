@@ -4,7 +4,8 @@ from collections import deque
 
 class TxCache:
 
-    def __init__(self):
+    def __init__(self, logger):
+        self.logger = logger
         self.tx_dict = dict()
         self.tx_queue = deque()
         self.limit = int(os.environ['TX_ADDRESS_CACHE_LIMIT'])
@@ -28,3 +29,12 @@ class TxCache:
         if tx_outs and len(tx_outs) > out_nr:
             return tx_outs[out_nr]
         return None
+
+    def reduce_size(self):
+        self.logger.info("reducing size of cache due to small workload")
+        self.logger.info(f"previous cache size: {len(self.tx_queue)}")
+        for _ in range(3000):
+            if self.tx_queue:
+                del self.tx_dict[self.tx_queue.popleft()]
+        self.logger.info(f"current cache size: {len(self.tx_queue)}")
+

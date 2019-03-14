@@ -3,7 +3,6 @@ Update database
 """
 import os
 import time
-import traceback
 from slickrpc import Proxy
 from logger import Logger
 import mongo
@@ -25,7 +24,7 @@ class BlockchainDBMaintainer:
             f"http://{os.environ['CRYPTO_USER']}:{os.environ['CRYPTO_PASS']}@"
             f"127.0.0.1:{os.environ['CRYPTO_PORT']}"
         )
-        self.tx_cache = TxCache()
+        self.tx_cache = TxCache(logger=self.logger)
 
     def run(self):
         """execution starts here"""
@@ -35,14 +34,17 @@ class BlockchainDBMaintainer:
             self.logger.info('current collection count: {}'.format(
                 self.mongo.blocks_collection.count()
             ))
-            time.sleep(max(0, 30 - int(time.time() - start_time)))
+            time_to_sleep = max(0, 30 - int(time.time() - start_time))
+            if time_to_sleep > 10:
+                self.tx_cache.reduce_size()
+            time.sleep(time_to_sleep)
 
     def save_blocks(self):
         """saves blocks"""
         for block in BTCBlockIterator(
                 self.rpc_connection,
                 self.logger,
-                self.mongo.hash_of_last_saved_block):
+                self.mongo):
             if block['height'] % 100 == 0:
                 self.logger.info(f"saving block (height: {block['height']})")
             self.tx_cache.add_from_block(block)
@@ -55,7 +57,7 @@ if __name__ == '__main__':
         try:
             BlockchainDBMaintainer().run()
         except Exception as e:
-            traceback.print_exc()
+            print(e)
             time.sleep(10)
 
 

@@ -118,3 +118,6 @@ class Mongo:
                               f'querry result {result}')
             return []
 
+    def block_is_saved(self, block_hash):
+        return bool(self.collection.find({'hash': block_hash}).count())
+
