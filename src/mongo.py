@@ -35,7 +35,7 @@ class Mongo:
         """establish_connection"""
         while True:
             try:
-                mongo_container = 'localhost'
+                mongo_container = os.environ.get('MONGODB_HOST', 'localhost')
                 self.logger.info('connecting to mongo at: {}'.format(
                     mongo_container
                 ))
