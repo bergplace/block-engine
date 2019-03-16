@@ -22,7 +22,7 @@ class BlockchainDBMaintainer:
         self.mongo = mongo.Mongo(self.logger)
         self.rpc_connection = Proxy(
             f"http://{os.environ['CRYPTO_USER']}:{os.environ['CRYPTO_PASS']}@"
-            f"127.0.0.1:{os.environ['CRYPTO_PORT']}"
+            f"{os.environ['CRYPTO_HOST']}:{os.environ['CRYPTO_PORT']}"
         )
         self.tx_cache = TxCache(logger=self.logger)
 

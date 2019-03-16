@@ -42,4 +42,5 @@ services:
       - "CRYPTO_USER=${cryptocurrency_rpc_username}"
       - "CRYPTO_PASS=${cryptocurrency_rpc_password}"
       - "CRYPTO_PORT=${cryptocurrency_rpc_port}"
+      - "CRYPTO_HOST=zcashd"
       - "TX_ADDRESS_CACHE_LIMIT=${tx_address_cache_limit}"
