@@ -35,7 +35,7 @@ class BlockchainDBMaintainer:
                 self.mongo.blocks_collection.count()
             ))
             time_to_sleep = max(0, 30 - int(time.time() - start_time))
-            if time_to_sleep > 10:
+            if time_to_sleep > 27:
                 self.tx_cache.reduce_size()
             time.sleep(time_to_sleep)
 
