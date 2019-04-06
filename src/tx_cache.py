@@ -31,10 +31,11 @@ class TxCache:
         return None
 
     def reduce_size(self):
-        self.logger.info("reducing size of cache due to small workload")
-        self.logger.info(f"previous cache size: {len(self.tx_queue)}")
-        for _ in range(3000):
-            if self.tx_queue:
-                del self.tx_dict[self.tx_queue.popleft()]
-        self.logger.info(f"current cache size: {len(self.tx_queue)}")
+        if self.tx_queue:
+            self.logger.info("reducing size of cache due to small workload")
+            self.logger.info(f"previous cache size: {len(self.tx_queue)}")
+            for _ in range(3000):
+                if self.tx_queue:
+                    del self.tx_dict[self.tx_queue.popleft()]
+            self.logger.info(f"current cache size: {len(self.tx_queue)}")
 
