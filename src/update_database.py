@@ -3,6 +3,7 @@ Update database
 """
 import os
 import time
+import subprocess
 from slickrpc import Proxy
 from logger import Logger
 import mongo
@@ -53,6 +54,8 @@ class BlockchainDBMaintainer:
 
 
 if __name__ == '__main__':
+    if not os.environ['CRYPTO_HOST']:
+        os.environ['CRYPTO_HOST'] = subprocess.getoutput("ip route | awk 'NR==1 {print $3}'")
     while True:
         try:
             BlockchainDBMaintainer().run()
